@@ -1,0 +1,37 @@
+{
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true
+	},
+	"extends": "eslint:recommended",
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": 6,
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+
+
+	"globals": {
+		"require": true,
+		"module": true,
+		"window": true,
+		"define": true,
+		"$": true
+	},
+
+	"rules": {
+		"no-debugger": 0,
+		"no-console": 0,
+		"indent": ["error", "tab"],
+		"quotes": ["warn", "double"],
+		"allowTemplateLiterals": 0,
+		"comma-dangle" : ["error", "never"],
+		"semi": ["error", "always"],
+		"no-unused-vars": [0, {"args": "none"}],
+		"no-trailing-spaces" : ["error"]
+	},
+	"plugins": ["json"]
+}

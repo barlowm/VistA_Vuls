@@ -1,0 +1,25 @@
+{
+  "name": "planc_vulnerabilities",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "setup": "npm install npm -g& npm install gulp-cli -g& npm install gulp -g& npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Barlow <barlowm@gmail.com> (http://mwbarlow.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barlowm/VistA_Vuls.git"
+  },
+  "bugs": {
+    "url": "https://github.com/barlowm/VistA_Vuls/issues"
+  },
+  "homepage": "https://github.com/barlowm/VistA_Vuls#readme",
+  "dependencies": {
+    "fs-extra": "^7.0.0",
+    "linebyline": "^1.3.0",
+    "moment": "^2.22.2"
+  }
+}

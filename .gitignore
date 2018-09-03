@@ -1,0 +1,33 @@
+# Include project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+# Useful .gitignore templates: https://github.com/github/gitignore
+
+dist/
+build/
+
+# Ignore node_modules
+node_modules/
+bower_components/
+.DS_Store/
+htdocs/
+.idea/
+reports/
+src/js/env.json
+src/js/version.json
+
+# dotenv
+# TODO Comment out this rule if environment variables can be committed
+.env
+
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Logs
+logs
+*.log
+npm-debug.log*

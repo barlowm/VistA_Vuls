@@ -1,0 +1,29 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+	<title>Simple Boilerplate Application</title>
+	<link rel="stylesheet" href="./css/common.css">
+	<script> var __basePath = ''; </script>
+	<style> html, body { margin: 0; padding: 0; height: 100%; } </style>
+	<script src="https://unpkg.com/ag-grid-enterprise@18.1.1/dist/ag-grid-enterprise.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+	Select Vulnerability to examine: <select id="whatVulnerability">
+		<option value="">Select Vulnerability to Examine</option>
+	</select>
+	<span id="VulCount"></span><span id="selVulCount"></span>
+
+	<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
+	<div id="gridData"></div>
+
+	<div id="response"></div>
+
+	<!-- <script src="./gridData.js"></script> -->
+	<script src="./ScanResults/VistAVuls-Access.js"></script>
+	<script src="./selectVuls.js"></script>
+	<script src="./main.js"></script>
+</body>
+
+</html>
