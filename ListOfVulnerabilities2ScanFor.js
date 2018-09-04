@@ -7,6 +7,12 @@ Vulnerabilities = function() {
 			"options": "-nr"
 		},
 		{
+			"name": "S_Up",
+			"type": "Upper",
+			"value": "S ^",
+			"options": "-nr"
+		},
+		{
 			"name": "S_UPDARRAY",
 			"type": "Upper",
 			"value": "S @UPDARRAY",
@@ -15,7 +21,7 @@ Vulnerabilities = function() {
 		{
 			"name": "D_UPDATE_GMPLUTL",
 			"type": "Upper",
-			"value": "D UPDATE^GMPLUTL",
+			"value": "D UPDATE\^GMPLUTL",
 			"options": "-nr"
 		},
 		{
@@ -43,31 +49,31 @@ Vulnerabilities = function() {
 		{
 			"name": "_XUS_XWB_",
 			"type": "Upper",
-			"value": "^XUS^XWB^",
+			"value": "XUS\^XWB",
 			"options": "-nr"
 		},
 		{
 			"name": '__KCHK_XUSRB_XUPROGMODE',
 			"type": "Upper",
-			"value": '$$KCHK^XUSRB(""XUPROGMODE"")',
+			"value": 'KCHK.*XUSRB',
 			"options": "-nr"
 		},
 		{
 			"name": "Q_KCHK_",
 			"type": "Upper",
-			"value": "Q:$$KCHK^",
+			"value": "Q:\$\$KCHK",
 			"options": "-nr"
 		},
 		{
 			"name": "_VA_200_DUZ_1",
 			"type": "Upper",
-			"value": "^VA(200,DUZ,.1)",
+			"value": "VA(200,DUZ,.1)",
 			"options": "-nr"
 		},
 		{
 			"name": "_VA_200_DUZ_0",
 			"type": "Upper",
-			"value": "^VA(200,DUZ,0)",
+			"value": "VA(200,DUZ,0)",
 			"options": "-nr"
 		},
 		{
@@ -127,7 +133,7 @@ Vulnerabilities = function() {
 		{
 			"name": "__CHK_XQCS",
 			"type": "Upper",
-			"value": "$$CHK^XQCS",
+			"value": "CHK\^XQCS",
 			"options": "-nr"
 		},
 		{

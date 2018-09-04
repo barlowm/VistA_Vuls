@@ -3,6 +3,7 @@ var columnDefs = [
 	    {headerName: "Root", field: "GlobalRoot", width:80},
 	    {headerName: "Line #", field: "vLines", width:80},
 	    {headerName: "Data", field: "lineData"},
+	    {headerName: "Notes", field: "notes", editable: true},
 
 	    {field: "Package", rowGroup:true, hide:true},
 	    {field: "NodeType", rowGroup:true, hide:true},

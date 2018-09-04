@@ -14,6 +14,7 @@ htdocs/
 reports/
 src/js/env.json
 src/js/version.json
+ScanResults/
 
 # dotenv
 # TODO Comment out this rule if environment variables can be committed

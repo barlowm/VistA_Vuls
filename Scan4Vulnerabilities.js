@@ -23,6 +23,8 @@ const scanPath = "../Pack/*";
 const Vulnerability = require("./ListOfVulnerabilities2ScanFor.js");
 // const scanPath = "../Packages/*";
 
+let VulsArray = [];
+
 const gridData = {
     "Name":"",
     "Path": "",
@@ -56,10 +58,11 @@ const scan4Vuls = function() {
         let parsed = gridData;
         let d1 = line.split(":");
         let d2 = d1.splice(0,2);
-        let types = parsed.Path.split("/");
+        let types = d2[0].split("/");
         let tLen = types.length;
+
         parsed.Path = d2[0];
-        parsed.Name = parsed.Path.split("/")[parsed.Path.split("/").length-1];
+        parsed.Name = types[tLen-1];
         parsed.Package =  types[tLen-3];
         parsed.Vulnerability = Vulnerability.name;
         parsed.vLines = d2[1];
@@ -77,6 +80,9 @@ const scan4Vuls = function() {
             }
             parsed.lineData = gLine;
         }
+        if ("" == parsed.Package || !parsed.Package) {
+        	console.log(`Package not set - ${parsed.Path} - ${parsed.Name} - [${parsed.Package}] - ${Vulnerability.name} - ${tLen}`);
+        }
         return parsed;
     }
 
@@ -85,6 +91,8 @@ const scan4Vuls = function() {
             console.log("Starting -", vul.name);
             const startTime = moment();
             let lineNo = 1;
+            let GlobalsCount = 0;
+            let RoutinesCount = 0;
 
             let spawn = require('child_process').spawn;
             let child = spawn('grep', [ vul.options, vul.value, scanPath ]);
@@ -101,10 +109,19 @@ const scan4Vuls = function() {
                 if (lineNo++ > 1) {
                     grepOutput.write(",\n");
                 }
-                grepOutput.write(JSON.stringify(parseLine2Obj(line, vul), null, 2));
+                let grepParse = parseLine2Obj(line, vul);
+                if ("" == grepParse.GlobalRoot) {
+                	RoutinesCount++;
+                }
+                else {
+					GlobalsCount++;
+                }
+                grepOutput.write(JSON.stringify(grepParse, null, 2));
             });
             rl.on('close', function() {
                 grepOutput.write("]");
+				VulsArray.push(JSON.parse(`{ "name": "${vul.name} - G=${GlobalsCount} - R=${RoutinesCount} - T=${lineNo-1}", "value": "./ScanResults/VistAVuls-${vul.name}.js" }`));
+
                 const endTime = moment();
                 let timeDiff = moment.utc(moment(endTime,"DD/MM/YYYY HH:mm:ss").diff(moment(startTime,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss.SSS");
                 console.log(`Found ${lineNo} potential vulnerabilities for name = ${vul.name}`);
@@ -116,26 +133,42 @@ const scan4Vuls = function() {
     return { ParsePromise }
 };
 
-module.exports = scan4Vuls();
+const sortVulList = function() {
+	function sortByKey(array, key) {
+	    return array.sort(function(a, b) {
+	        var x = a[key]; var y = b[key];
+	        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+	    });
+	}
+
+	let out = sortByKey(VulsArray, "name");
+	const selectVuls = fs.createWriteStream(`./selectVuls.js`);
+	selectVuls.write("const Options = [");
+	let line = 0;
+	let buf = "";
+	out.forEach(function(x) {
+		buf = "";
+		if (line++ > 0) {
+			buf = ",";
+		}
+		buf += JSON.stringify(x, null, 2);
+		selectVuls.write(buf);
+	});
+
+	selectVuls.write("]");
+}
 
 
 const main = function() {
     const scanner = scan4Vuls();
     const startTime = moment();
     console.log(`Scanning VistA for ${Vulnerability.length} different vulnerabilities`);
-    const selectVuls = fs.createWriteStream(`./selectVuls.js`);
 
     const a = [];
-    selectVuls.write("const Options = [");
-    let numVuls = 0;
+
     Vulnerability.forEach(function(v) {
-        if (numVuls++ > 0) {
-            selectVuls.write(", ");
-        }
-        selectVuls.write(`{ "name": "${v.name}", "value": "./ScanResults/VistAVuls-${v.name}.js" }`);
         a.push(scanner.ParsePromise(v));
     })
-    selectVuls.write("];");
 
     Promise.all(a).then(function(v) {
         let count = 0;
@@ -145,5 +178,6 @@ const main = function() {
         const endTime = moment();
         let timeDiff = moment.utc(moment(endTime,"DD/MM/YYYY HH:mm:ss").diff(moment(startTime,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss.SSS");
         console.log(`Processed ${count} total vulnerabilities scanned in ${timeDiff}`);
+        sortVulList();
     })
 }()
