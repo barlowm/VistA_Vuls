@@ -10,11 +10,27 @@
 </head>
 
 <body>
-	Select Vulnerability to examine: <select id="whatVulnerability">
-		<option value="">Select Vulnerability to Examine</option>
-	</select>
-	<span id="VulCount"></span><span id="selVulCount"></span>
+<div id="ScanResults1">
+	<span>
+		Select Scan Results to examine: <select id="whatScanResults1">
+			<option value="">Select Scan Results</option>
+		</select>
+		<span id="VulCountSR_1"></span><span id="selVulCount_SR_1"></span>
+	</span>
+	<span style="margin-left: 5em;">
+		Select Scan Results to compare against: <select id="whatScanResults2">
+			<option value="">Select Scan Results</option>
+		</select>
+		<span id="VulCountSR_2"></span><span id="selVulCount_SR_2"></span>
+	</span>
+</div>
 
+	<div>
+		Select Vulnerability to examine: <select id="whatVulnerability">
+			<option value="">Select Vulnerability</option>
+		</select>
+		<span id="VulCount"></span><span id="selVulCount"></span>
+	</div>
 	<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
 	<div id="gridData"></div>
 
