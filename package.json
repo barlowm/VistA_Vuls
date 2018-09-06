@@ -20,7 +20,9 @@
   "dependencies": {
     "fs-extra": "^7.0.0",
     "http-server": "^0.11.1",
+    "klaw": "^3.0.0",
     "linebyline": "^1.3.0",
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "through2": "^2.0.3"
   }
 }
