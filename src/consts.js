@@ -17,7 +17,8 @@ module.exports = {
 	    }
 	],
 	scanPathDev : "../Pack/*",
-	scanPath : "../Packages/*"
+	scanPath : "../Packages/*",
+	scanResults: "./ScanResults"
 };
 
 // Live Data/Folder

@@ -15,6 +15,7 @@ const getFolderList = function() {
 	}
 
 	const getDirs = function(src) {
+		console.log("getDirs - ", src);
 		return readdirSync(src).map(name => join(src, name)).filter(isDirectory)
 	}
 
