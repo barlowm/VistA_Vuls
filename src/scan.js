@@ -50,6 +50,7 @@ const scan = function() {
 	 * Initialize all the constants for the scanning process
 	 */
 	const prepAndScan = function() {
+
 	    if (dev) {
 	    	Vulnerability = constants.VulnerabilityDev;
 	    	scanPath = constants.scanPathDev;
@@ -60,11 +61,74 @@ const scan = function() {
 	    }
 	    destPath = constants.scanResults + "/Scan_" + moment().format("YYYY_MM_DD-H_m_s");
 
-	    console.log("Vulnerability List: ", Vulnerability);
-	    console.log("Path 2 Scan: ", scanPath);
-	    console.log("List Directories for Scan Results - ", gfl.getDirs(constants.scanResults));
-	    console.log(destPath);
-	    fs.ensureDir(destPath, doScan);
+	    // console.log("Vulnerability List: ", Vulnerability);
+	    // console.log("Path 2 Scan: ", scanPath);
+	    // console.log("List Directories for Scan Results - ", gfl.getDirs(constants.scanResults));
+	    // console.log("List Folders - ", gfl.getDirs(constants.scanResults));
+	    // gfl.getFolderList(constants.scanResults, doScan);
+
+
+		// const a = [];
+		// a.push(gfl.PromiseEnsureDir(destPath));
+		// a.push(gfl.PromiseGenFolderListFile(constants.scanResults));
+		// Promise.all(a).then(function(v) {
+		// 	console.log("Result Count - ", v.length);
+		// 	v.forEach(function(vx) {
+		// 		console.log(vx);
+		// 		console.log("---------------");
+		// 	})
+
+		// });
+
+		fs.ensureDir(destPath, function(err, data) {
+			if (err) {
+				console.log("Error - ", err.code);
+				return;
+			}
+		    gfl.PromiseGenFolderListFile(constants.scanResults).then(function(result) {
+		    	console.log("This all worked - ", result);
+		    	doScan();
+
+		    }, function(err) {
+		    	console.log("Promise Rejection Handler - ", err);
+		    });
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+	    // gfl.PromiseEnsureDir(destPath).then(function(result) {
+	    // 	console.log("This all worked - ", result);
+	    // 	// doScan();
+
+		   //  gfl.PromiseGenFolderListFile(constants.scanResults).then(function(result) {
+		   //  	console.log("This all worked - ", result);
+
+		   //  }, function(err) {
+		   //  	console.log("Promise Rejection Handler - ", err);
+		   //  });
+
+	    // }, function(err) {
+	    // 	console.log("Promise Rejection Handler - ", err);
+	    // });
+
+
+	    // gfl.PromiseGenFolderListFile(constants.scanResults).then(function(result) {
+	    // 	console.log("This all worked - ", result);
+
+	    // }, function(err) {
+	    // 	console.log("Promise Rejection Handler - ", err);
+	    // });
+	    // console.log(destPath);
+	    // fs.ensureDir(destPath, doScan);
 	};
 
 	/*
