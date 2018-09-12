@@ -1,9 +1,17 @@
-var columnDefs = [
-
+	// const srcRootPath = "https://raw.githubusercontent.com/OSEHRA/VistA-M/master/";
+	const srcRootPath = "./";
+	var columnDefs = [
 	    {headerName: "Root", field: "GlobalRoot", width:80},
 	    {headerName: "Line #", field: "vLines", width:80},
 	    {headerName: "Data", field: "lineData"},
 	    {headerName: "Notes", field: "notes", editable: true},
+	    {headerName: "Ignore", field: "ignore", editable: true, rowGroup:true,
+	        cellRenderer: params => {
+	        	if (!params.node.allChildrenCount) {	// This is a child node
+			        return `<input type='checkbox' ${params.value ? 'checked' : ''} />`;
+	        	}
+		    }
+		},
 
 	    {field: "Package", rowGroup:true, hide:true},
 	    {field: "NodeType", rowGroup:true, hide:true},
@@ -27,7 +35,7 @@ var columnDefs = [
 					const theName = params.data.Name;
 					let nPath = params.data.Path.split("/").splice(-4);
 					let nPath2 = nPath.join("/");
-					const path = "https://raw.githubusercontent.com/OSEHRA/VistA-M/master/" + nPath2;
+					const path = srcRootPath + nPath2;
 					return `<a href="${path}" target="_theFile">${theName}</a>`;
 				}
 				return params.value;
@@ -54,18 +62,48 @@ var columnDefs = [
 	};
 
 
-	$(document).ready(function(){
+	const setupthepage = function() {
+		console.log("")
 	    let gridDiv = $('#myGrid')[0];
+	    const ScanResultsSelectTag = $("#whatScanResults1");
 		const theSelectTag = $("#whatVulnerability");
+
 		const VulCount = $("#VulCount");
 
 		let theGrid = "";
 
-		Options.forEach(function(o) {
+			// scanResultsFolders comes from the _ScanResultsFolders file loaded in index.html
+		scanResultsFolders.forEach(function(o) {
 			if (null != o) {
-				theSelectTag.append(`<option value="${o.value}">${o.name}</option>`);
+				let d = o.replace("./", "");
+				console.log(`scanResultsFolders - ${o} - ${d}`)
+				ScanResultsSelectTag.append(`<option value="${o}">${d}</option>`);
 			}
 		});
+
+			// VulnerabilityList data comes from file _ScanResultsVulnerabilities file loaded in index.html
+		ScanResultsSelectTag.change( function() {
+			let scPath = "./_ScanResults/" + this.options[this.options.selectedIndex].value + "/scanComment.txt";
+
+			$("#scanComment").text(`No Scan Comment for: ${this.options[this.options.selectedIndex].text}`);
+			$.getScript( scPath, function( data, textStatus, jqxhr) {
+				if (data) {
+					$("#scanComment").text(`Scan Comment: ${data}`);
+				}
+			});
+
+			let v = VulnerabilityList[this.options[this.options.selectedIndex].value];
+			theSelectTag.empty().append(`<option value="">Select Scan Results</option>`);
+
+			v.forEach(function(o) {
+				if (null != o) {
+					theSelectTag.append(`<option value="${o.value}">${o.name}</option>`);
+				}
+			});
+			$("#selectVulnerability").removeClass("invisible");
+		})
+
+
 
 		theSelectTag.change( function() {
 			if ("" === theGrid) {
@@ -83,6 +121,7 @@ var columnDefs = [
 				gridOptions.api.redrawRows();
 			}
 			else {
+				console.log("Retrieving data from ", v);
 				$.getScript( v, function( data, textStatus, jqxhr) {
 					// addData2Grid(gridDiv, data);
 					let theData = JSON.parse(data);
@@ -100,4 +139,8 @@ var columnDefs = [
 				});
 			}
 		});
+	}
+
+	$(document).ready(function(){
+			setupthepage();
 	});

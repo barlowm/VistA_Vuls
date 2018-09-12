@@ -15,30 +15,34 @@
 		Select Scan Results to examine: <select id="whatScanResults1">
 			<option value="">Select Scan Results</option>
 		</select>
+		<span id="scanComment"></span>
 		<span id="VulCountSR_1"></span><span id="selVulCount_SR_1"></span>
 	</span>
+	<!--
 	<span style="margin-left: 5em;">
 		Select Scan Results to compare against: <select id="whatScanResults2">
 			<option value="">Select Scan Results</option>
 		</select>
 		<span id="VulCountSR_2"></span><span id="selVulCount_SR_2"></span>
 	</span>
+	-->
 </div>
 
-	<div>
+	<div id="selectVulnerability" class="invisible">
 		Select Vulnerability to examine: <select id="whatVulnerability">
 			<option value="">Select Vulnerability</option>
 		</select>
 		<span id="VulCount"></span><span id="selVulCount"></span>
 	</div>
-	<div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
+	<div id="myGrid" style="height: 90%;" class="ag-theme-balham"></div>
 	<div id="gridData"></div>
 
 	<div id="response"></div>
 
 	<!-- <script src="./gridData.js"></script> -->
-	<script src="./ScanResults/VistAVuls-Access.js"></script>
-	<script src="./selectVuls.js"></script>
+	<!-- <script src="./ScanResults/VistAVuls-Access.js"></script> -->
+	<script name="VulsVars" src="./_ScanResultsVulnerabilities.js"></script>
+	<script src="./_ScanResultsFolders.js"></script>
 	<script src="./main.js"></script>
 </body>
 

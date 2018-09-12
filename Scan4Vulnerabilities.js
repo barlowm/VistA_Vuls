@@ -3,6 +3,12 @@ const scan = require("./src/scan.js");
 
 const main = function() {
     console.log("Prep for Scan");
-    scan.prepAndScan();
-    console.log("Scan Complete");
+    console.log(process.argv.splice(0,2));
+    const scanComment = process.argv.join(" ");
+
+    scan.prepAndScan(scanComment).then(function(result) {
+	    console.log("Scan running in background");
+    }, function(err) {
+	    console.log("Scan Failed - ", err);
+    });
 }()
