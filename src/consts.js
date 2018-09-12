@@ -31,7 +31,7 @@ module.exports = {
 			"options": "-nr"
 		}
 	],
-	scanPathDev : "./Pack/*",
+	scanPathDev : "../Pack/*",
 	scanPath : "../Packages/*",
 	scanResults: "./_ScanResults",
 	VulResultsFile: "./_ScanResultsVulnerabilities.js",

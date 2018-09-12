@@ -1,13 +1,6 @@
 #Vulnerability Scanner
 
-***ToDo:*** 
-
-- Add check for "ScanResults" folder and create if not there
-- Add checkbox to each row to provide ability to simply check and flag as non vulnerability
-- Add ability to run a scan and compare against last scan
-- Flag ScanResults folder with date/time of scan
-- Pick Scan Results for specific date - Drop down to select ScanResults folder
-- Compare Scan Results from 2 different dates - 2 Drop downs to select 2 different ScanResults folders and pull in data that is NOT the same, or only pull in data that IS the same
+***ToDo:*** Add any new feature requests as an [issue](https://github.com/barlowm/VistA_Vuls/issues) in the git repo
 
 ##Prep Software Installation:
 
@@ -135,6 +128,8 @@ added 6 packages from 9 contributors and audited 7 packages in 1.027s
 found 0 vulnerabilities
 ```
 
+##Vulnerabilities to scan for
+
 The file containing the list of vulnerabilities to scan for as well as the path to the VistA source code repository to scan is in the "Scan4Vulnerabilities.js" file:
 
 ```
@@ -150,10 +145,18 @@ The list of vulnerabilities is an array of JSON objects of the following format:
 			"value": "S @", <-- The string to search for (this is a standard RegEx string)
 			"options": "" <-- The options to pass to grep (-nr are passed as a minimum)
 		}
+##Performing a scan
+
 Once configuration is complete to kick off a scan run the following command:
 
 ```
 > node Scan4Vulnerabilities
+```
+
+You can optionally add a note which will be associated with the scan being performed
+
+```
+> node Scan4Vulnerabilities This is my notation for this particular scan
 ```
 
 You should see something similar to the following:
@@ -174,10 +177,16 @@ Once the scan is complete you should see a result message showing the total # of
 Processed 7240 total vulnerabilities scanned in 00:00:11.797
 ```
 
+Additional scans can be performed and each set of scan results will be stored in their own folder in the "_ScanResults" folder. Different scans are identified by their own folder with a folder name specifying the scan date/time in the following format:
+
+***Scan_YYYY_MM_DD_HH_MM_SS_S***
+
+##Launching the Web Application
+
 Once scanning is complete you can launch the display application with the following command:
 
 ```
-> npx http-server
+> npm run server
 ```
 
 You should see something similar to the following:
