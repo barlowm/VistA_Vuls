@@ -1,5 +1,6 @@
 	// const srcRootPath = "https://raw.githubusercontent.com/OSEHRA/VistA-M/master/";
 	const srcRootPath = "./";
+	let PostURL = "";
 	var columnDefs = [
 	    {headerName: "Root", field: "GlobalRoot", width:80},
 	    {headerName: "Line #", field: "vLines", width:80},
@@ -50,6 +51,14 @@
 	    rowData: null,
 	    enableSorting:true,
 	    enableFilter:true,
+	    onCellValueChanged: function(event, a, b, c) {
+	    	// event.data.notes;
+	    	let theRecord = event.data;
+	    	let thePostData = { location: PostURL, data: theRecord };
+	    	$.post(location.href, thePostData, function() {
+console.log("Post has been processed and returned");
+	    	})
+	    },
 	    onGridReady: function(event) {
 	        event.api.sizeColumnsToFit();
 	    }
@@ -122,8 +131,8 @@
 			}
 			else {
 				console.log("Retrieving data from ", v);
+				PostURL = v;
 				$.getScript( v, function( data, textStatus, jqxhr) {
-					// addData2Grid(gridDiv, data);
 					let theData = JSON.parse(data);
 					let selVulCount = $("#selVulCount");
 					if (0 === theData.length) {

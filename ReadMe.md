@@ -150,13 +150,13 @@ The list of vulnerabilities is an array of JSON objects of the following format:
 Once configuration is complete to kick off a scan run the following command:
 
 ```
-> node Scan4Vulnerabilities
+> npm run scan
 ```
 
 You can optionally add a note which will be associated with the scan being performed
 
 ```
-> node Scan4Vulnerabilities This is my notation for this particular scan
+> npm run scan This is my notation for this particular scan
 ```
 
 You should see something similar to the following:
