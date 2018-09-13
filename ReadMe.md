@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: Notes
+---
+
 #Vulnerability Scanner
 
 ***ToDo:*** Add any new feature requests as an [issue](https://github.com/barlowm/VistA_Vuls/issues) in the git repo
@@ -206,6 +210,8 @@ Hit CTRL-C to stop the server
 ```
 
 You can then open up a web browser to see the web application
+
+![ScreenShot1](Notes/ScreenShot1.png)
 
 
 
