@@ -1,7 +1,7 @@
 const Vulnerability = require("../ListOfVulnerabilities2ScanFor.js");
 
 module.exports = {
-	DevMode: true,
+	DevMode: false,
 	Vulnerability : Vulnerability,
 	VulnerabilityDev0 : [
 	    {

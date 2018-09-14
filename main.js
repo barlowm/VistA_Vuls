@@ -16,22 +16,59 @@
 
 	    {field: "Package", rowGroup:true, hide:true},
 	    {field: "NodeType", rowGroup:true, hide:true},
-	    {valueGetter: function(params) {
+	    {headerName: "Vulnerability Info", valueGetter: function(params) {
 	    	if (!params.data) {
 				return "---";
 	    	}
 	    	else {
 		    	return params.data.Vulnerability + " - " + params.data.vType + " - " + params.data.vValue;
 	    	}
-	    }, rowGroup:true, hide:true}
+	    }, rowGroup:true, hide:true},
+
+	    {
+	    	headerName: "File",
+		    rowGroup:true, hide:true,
+		    valueGetter: function(params) {
+				if (params.data) {
+					const theName = params.data.Name;
+					let nPath = params.data.Path.split("/").splice(-4);
+					let nPath2 = nPath.join("/");
+					const path = srcRootPath + nPath2;
+					return `${path} - ${theName}`;
+					// return `<a href="${path}" target="_theFile">${theName}</a>`;
+				}
+				return params.value;
+			}
+		}
+
+
 	];
 
 	var gridOptions = {
+	    columnDefs: columnDefs,
+	    rowSelection: 'multiple',
+	    animateRows: true,
+	    enableRangeSelection: true,
+	    groupSelectsChildren: true,
+	    enableColResize: true,
+	    rowData: null,
+	    enableSorting:true,
+	    enableFilter:true,
+
+		sideBar: 'columns',
+		defaultColDef: {
+			// allow every column to be aggregated
+			enableValue: true,
+			// allow every column to be grouped
+			enableRowGroup: true,
+			// allow every column to be pivoted
+			enablePivot: true
+		},
+
 		autoGroupColumnDef: {
 			headerName:'Package / Type / Vulnerability / Link to Src',
 			rowGroup:true, hide:true,
 			valueGetter: function(params) {
-				// console.log(params);
 				if (params.data) {
 					const theName = params.data.Name;
 					let nPath = params.data.Path.split("/").splice(-4);
@@ -42,15 +79,8 @@
 				return params.value;
 			}
 		},
-	    columnDefs: columnDefs,
-	    rowSelection: 'multiple',
-	    animateRows: true,
-	    enableRangeSelection: true,
-	    groupSelectsChildren: true,
-	    enableColResize: true,
-	    rowData: null,
-	    enableSorting:true,
-	    enableFilter:true,
+
+
 	    onCellValueChanged: function(event, a, b, c) {
 	    	// event.data.notes;
 	    	let theRecord = event.data;
