@@ -5,6 +5,8 @@
   "main": "index.html",
   "scripts": {
     "setup": "npm install npm -g& npm install gulp-cli -g& npm install gulp -g& npm install",
+    "server": "node src/server",
+    "scan": "node Scan4Vulnerabilities.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mike Barlow <barlowm@gmail.com> (http://mwbarlow.com)",
