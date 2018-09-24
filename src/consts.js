@@ -1,5 +1,6 @@
 const Vulnerability = require("../ListOfVulnerabilities2ScanFor.js");
 
+// Set DevMode to true to use full package source and the "ListOfVulnerabilities2ScanFor.js" for the list of vulnerabilities
 module.exports = {
 	DevMode: false,
 	Vulnerability : Vulnerability,
@@ -13,21 +14,15 @@ module.exports = {
 	],
 	VulnerabilityDev : [
 		{
-			"name": "ACCESS",
+			"name": "AUTHENTICATE",
 			"type": "Upper",
-			"value": "ACCESS",
-			"options": "-nr"
+			"value": "AUTHENTICATE",
+			"options": "-inr"
 		},
-	    {
-	        "name": "IP Address",
-	        "type": "Regex",
-	        "value": "(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])",
-	        "options": "-inr"
-	    },
 		{
-			"name": "VERIFY",
+			"name": "Execute",
 			"type": "Upper",
-			"value": "VERIFY ",
+			"value": "EXECUTE",
 			"options": "-nr"
 		}
 	],

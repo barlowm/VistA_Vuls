@@ -47,6 +47,12 @@ const gridData = {
 
 
 const scan = function() {
+
+	const pad = function (num, size) {
+		var s = "000000000" + num;
+		return s.substr(s.length-size);
+	};
+
 	const getDestPath = function() {
 		return destPath;
 	}
@@ -63,12 +69,15 @@ const scan = function() {
 			if (constants.DevMode) {
 				Vulnerability = constants.VulnerabilityDev;
 				scanPath = constants.scanPathDev;
+				console.log("Running in DEVeloper Mode");
 			}
 			else {
 				Vulnerability = constants.Vulnerability;
 				scanPath = constants.scanPath;
+				console.log("Running in PRODuction Mode");
 			}
-			// destPath = getDestPath();
+			console.log("Scan Path - ", scanPath);
+			console.log("Number of Vulnerabilities to scan for - ", Vulnerability.length);
 
 			fs.ensureDir(destPath, function(err, data) {
 				if (err) {
@@ -136,7 +145,6 @@ const scan = function() {
 	const ParsePromise = function(vul, scanPath, dest) {
 		return new Promise((resolve, reject) => {
 			const grepOutputStreamPath = genGrepOutputPath(dest, vul);
-			console.log("Starting -", vul.name);
 			const startTime = moment();
 			let lineNo = 1;
 			let GlobalsCount = 0;
@@ -152,7 +160,7 @@ const scan = function() {
 			rl.on('line', function(line) {
 				// a "clock" letting the user know the process is still running
 				if (0 === lineNo%1000) {
-					console.log(`Parsing - ${lineNo} of ${vul.name} scan`);
+					console.log(`Recording potential vulnerability #${lineNo} of ${vul.name} scan`);
 				}
 
 				if (lineNo++ > 1) {
@@ -175,7 +183,7 @@ const scan = function() {
 				// How long did this particular scan take
 				const endTime = moment();
 				let timeDiff = moment.utc(moment(endTime,"DD/MM/YYYY HH:mm:ss").diff(moment(startTime,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss.SSS");
-				console.log(`Found ${lineNo} potential vulnerabilities for name = ${vul.name}`);
+				console.log(`Found ${pad(lineNo, 6)} potential vulnerabilities for name = ${vul.name} / value = ${vul.value}`);
 				resolve(lineNo);
 			});
 		});
@@ -229,11 +237,11 @@ const scan = function() {
 			});
 			const endTime = moment();
 			let timeDiff = moment.utc(moment(endTime,"DD/MM/YYYY HH:mm:ss").diff(moment(startTime,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss.SSS");
+			console.log("--------------------------");
 			console.log(`Processed ${count} total vulnerabilities scanned in ${timeDiff}`);
 			sortVulList();
 		});
 	}
-
 	return { prepAndScan }
 }();
 
