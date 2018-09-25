@@ -2,7 +2,7 @@
 	const srcRootPath = "./";
 	let PostURL = "";
 	var columnDefs = [
-	    {headerName: "Root", field: "GlobalRoot", width:80},
+	    {headerName: "Global Reference", field: "GlobalRoot", width:80},
 	    {headerName: "Line #", field: "vLines", width:80},
 	    {headerName: "Data", field: "lineData"},
 	    {headerName: "Notes", field: "notes", editable: true},
