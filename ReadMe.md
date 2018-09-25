@@ -8,7 +8,7 @@ typora-copy-images-to: Notes
 
 ##Prep Software Installation:
 
-Make sure the following software is previously installed on the machine that will be running the code:
+Make sure the following software is previously installed on the machine that will be running the code (Note check [here](./Notes/SWInstall.md) for instructions on how to install the various pieces of software):
 
 Git (version 2.10 or greater)
 

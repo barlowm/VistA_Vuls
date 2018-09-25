@@ -2,7 +2,7 @@ const Vulnerability = require("../ListOfVulnerabilities2ScanFor.js");
 
 // Set DevMode to true to use full package source and the "ListOfVulnerabilities2ScanFor.js" for the list of vulnerabilities
 module.exports = {
-	DevMode: false,
+	DevMode: true,
 	Vulnerability : Vulnerability,
 	VulnerabilityDev0 : [
 	    {
@@ -22,7 +22,7 @@ module.exports = {
 		{
 			"name": "Execute",
 			"type": "Upper",
-			"value": "EXECUTE",
+			"value": "EXE--CUTE",
 			"options": "-nr"
 		}
 	],
