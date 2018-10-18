@@ -3,10 +3,10 @@
 	let PostURL = "";
 	var columnDefs = [
 	    {headerName: "Global Reference", field: "GlobalRoot", width:80},
-	    {headerName: "Line #", field: "vLines", width:80},
+	    {headerName: "Line #", field: "vLines", width:40},
 	    {headerName: "Data", field: "lineData"},
 	    {headerName: "Notes", field: "notes", editable: true},
-	    {headerName: "Ignore", field: "ignore", editable: true, checkboxSelection:true },
+	    {headerName: "Ignore", field: "ignore", editable: true, checkboxSelection:true, width:40},
 
 	    {field: "Package", rowGroup:true, hide:true},
 	    {field: "NodeType", rowGroup:true, hide:true},
@@ -103,7 +103,7 @@ myArray = y.filter( function( el ) {
  **/
 
 
-			}
+			});
 			console.log(`selection changed, ${nodes.length} rows selected`);
 		},
 

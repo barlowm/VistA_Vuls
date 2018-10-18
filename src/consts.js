@@ -2,7 +2,7 @@ const Vulnerability = require("../ListOfVulnerabilities2ScanFor.js");
 
 // Set DevMode to true to use full package source and the "ListOfVulnerabilities2ScanFor.js" for the list of vulnerabilities
 module.exports = {
-	DevMode: true,
+	DevMode: false,
 	Vulnerability : Vulnerability,
 	VulnerabilityDev0 : [
 	    {
@@ -27,7 +27,7 @@ module.exports = {
 		}
 	],
 	scanPathDev : "./Pack/*",
-	scanPath : "../Packages/*",
+	scanPath : "./Packages/*",
 	scanResults: "./_ScanResults",
 	VulResultsFile: "./_ScanResultsVulnerabilities.js",
 	scanResultsListFile: "./_ScanResultsFolders.js"

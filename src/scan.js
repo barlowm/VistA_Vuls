@@ -178,7 +178,8 @@ const scan = function() {
 			rl.on('close', function() {
 				grepOutput.write("]");
 				// Add this vulnerability scan to the VulsArray which is used for the select tag
-				VulsArray.push(JSON.parse(`{ "name": "${vul.name} - G=${GlobalsCount} - R=${RoutinesCount} - T=${lineNo-1}", "value": "${grepOutputStreamPath}", "vulsearch": "${vul.value}" }`));
+				// VulsArray.push(JSON.parse(`{ "name": "${vul.name} - G=${GlobalsCount} - R=${RoutinesCount} - T=${lineNo-1}", "value": "${grepOutputStreamPath}", "vulsearch": '${vul.value}' }`));
+				VulsArray.push(JSON.parse(`{ "name": "${vul.name} - G=${GlobalsCount} - R=${RoutinesCount} - T=${lineNo-1}", "value": "${grepOutputStreamPath}", "vulsearch": "TBD" }`));
 
 				// How long did this particular scan take
 				const endTime = moment();
